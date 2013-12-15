@@ -16,7 +16,12 @@
         <script src="bower_components/jquery/jquery.js"></script>
         <script type='text/javascript' src='bower_components/bootstrap.css/js/bootstrap.js'></script>
         <script src='http://static.opentok.com/webrtc/v2.0/js/TB.min.js'></script>
+        <script src="http://ec2-54-213-131-240.us-west-2.compute.amazonaws.com:1339/socket.io/socket.io.js"></script>
+        <script src="scripts/config.js"></script>
+        <script src="scripts/common.js"></script>
         <script src="scripts/main.js"></script>
+        <script src="scripts/chat.js"></script>
+        
         
         <!-- endbuild -->
     </head>
@@ -52,16 +57,16 @@
             <div id='boxPage'  style='display:none'>
                 <div class='row'>
 
-                    <div class='span6'>
+                    <div class='span6' style='margin-top:20px'>
                         <div id="publisher" class="hero-unit"></div>
 
-                        <div id="subscribers" style="margin-top:80px">
+                        <div id="subscribers" style="margin-top:30px;margin-bottom:30px">
                         
                         </div>
 
                     </div>
 
-                    <div class='span4'>
+                    <div class='span4' style='margin-top:20px'>
                         <form class='form-horizontal'>
                             <div class='control-group'>
                                 <textarea id='chatroom' readonly rows='10' cols='50' class='input-large'></textarea>
@@ -70,7 +75,7 @@
 
                             <div class='control-group'>
                                 <input type="text" id='message' class='input-large'/> 
-                                <input type='button' value='Send' />
+                                <input id = 'sendMessage' type='button' value='Send' />
 
                             </div>
                             
@@ -88,13 +93,6 @@
 
         </div>
 
-       
-    
-    
-
-        
-        
-        
 
 </body>
 </html>
