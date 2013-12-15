@@ -12,7 +12,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/bootstrap.css/css/bootstrap.css">
+        <link rel="stylesheet" href="bower_components/bootstrap.css/css/bootstrap-responsive.css">
         <script src="bower_components/jquery/jquery.js"></script>
         <script type='text/javascript' src='bower_components/bootstrap.css/js/bootstrap.js'></script>
         <script src='http://static.opentok.com/webrtc/v2.0/js/TB.min.js'></script>
@@ -26,15 +26,64 @@
         <![endif]-->
         <div class='container'>
 
-            <div class="hero-unit">
-              <h1>Interview Box</h1>
-              
-              <div id="publisher"></div>
-                <div id="subscribers" >
+            <h1>Interview Box</h1>
+
+            <div id='loginPage'>
+                <form role="form">
                     
-                </div>
+                    <div class="form-group">
+                        <label for='username'>User name</label>
+                        <input type='text' class='form-control' id='username' placeholder='Enter user name' value='Joe'>
+                    </div>
+                    <div class="form-group">
+                        <label for='role'>Role</label>
+                        <select id='role' class='form-control'>
+                            <option value='interviewer'>Interviewer</option>
+                            <option value='interviewee'>Interviewee</option>
+                        </select>
+
+                    </div>
+                    <button id='login' type='button' class='btn btn-default'>Login</button>
+
+                </form>
+            </div>
+
+
+            <div id='boxPage'  style='display:none'>
+                <div class='row'>
+
+                    <div class='span6'>
+                        <div id="publisher" class="hero-unit"></div>
+
+                        <div id="subscribers" style="margin-top:80px">
+                        
+                        </div>
+
+                    </div>
+
+                    <div class='span4'>
+                        <form class='form-horizontal'>
+                            <div class='control-group'>
+                                <textarea id='chatroom' readonly rows='10' cols='50' class='input-large'></textarea>
+
+                            </div>
+
+                            <div class='control-group'>
+                                <input type="text" id='message' class='input-large'/> 
+                                <input type='button' value='Send' />
+
+                            </div>
+                            
+
+                        </form>
+                    
+
+                    </div>
+
+                </div> 
               
             </div>
+            
             
 
         </div>
