@@ -31,9 +31,14 @@ $(document).ready(function(){
         if(location.hash !== '#interviewbox') {
             $('#loginPage').show();
             $('#boxPage').hide();
+            autoFocusUsername();
         } else {
             startInterviewBox();
         }
+    }
+
+    function autoFocusUsername() {
+        $('#username').select();
     }
 
 
@@ -84,7 +89,7 @@ $(document).ready(function(){
 
         window.setTimeout(function(){
             $('body').trigger('welcome');
-        }, 2000);
+        }, 500);
         
 
     }
