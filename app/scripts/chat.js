@@ -1,13 +1,6 @@
 $(document).ready(function(){
 
 	var socket = io.connect('http://ec2-54-213-131-240.us-west-2.compute.amazonaws.com:1339');
-	console.log('socket is:', socket);
-	socket.on('news', function (data) {
-		console.log('get news!')
-		console.log(data);
-		socket.emit('my other event', { my: 'data' });
-	});
-
 
 	socket.on('newMessage', function (data) {
 		console.log('get new message: ', data);
@@ -18,31 +11,45 @@ $(document).ready(function(){
 	});
 
 
-
-
-
-	$('#sendMessage').on('click', function(){
+	$('#sendMessageForm').on('submit', function(){
 		var message = $('#message').val();
 		if(message == '') {
 			alert('Message should not be empty.');
-			return;
+			return false;
 		}
 
 		addMessageToChatroom(getUsername(), message);
 		sendMessageToOtherUsers(getUsername(), message);
+		$('#message').val('');
+		return false;
 
 
 	});
 
+	$('body').on("welcome", function(){
+		sendWelcomeInformation();
+	});
+
+	function sendWelcomeInformation() {
+
+		var message = 'Welcome ' + getUsername() + ' to Interview Box.'
+		addMessageToChatroom('Admin', message);
+		sendMessageToOtherUsers('Admin', message);
+	}
+
 	function addMessageToChatroom(username, message) {
 		var messages = $('#chatroom').val();
-		messages = messages + '\n' + username + ': ' +message;
+		messages = messages + '\n' + username + ': ' + message;
 
 		$('#chatroom').val(messages);
+		var  chatroom = document.getElementById('chatroom');
+		chatroom.scrollTop = chatroom.scrollHeight;
+		$('#chatroom').scrollTop = $('#chatroom').scrollHeight;
 
 	}
 
 	function sendMessageToOtherUsers(username, message) {
+		
 		socket.emit('newMessage', {username:username, message:message});
 	}
 

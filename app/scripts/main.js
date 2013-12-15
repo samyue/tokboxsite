@@ -10,11 +10,11 @@ $(document).ready(function(){
 
     route();
 
-    $('#login').on('click', function(){
+    $('#loginForm').on('submit', function(){
         var username = $('#username').val();
         if(username == "") {
             alert('User name should not be empty.');
-            return;
+            return false;
         }
 
         saveUsername(username);
@@ -23,11 +23,11 @@ $(document).ready(function(){
         $('#boxPage').show();
         startInterviewBox();
         location.hash = "#interviewbox"; 
+        return false;
 
     });
 
     function route() {
-        console.log(location);
         if(location.hash !== '#interviewbox') {
             $('#loginPage').show();
             $('#boxPage').hide();
@@ -37,7 +37,6 @@ $(document).ready(function(){
     }
 
 
-
     function sessionConnectedHandler (event) {
         session.publish( publisher );
         subscribeToStreams(event.streams);
@@ -45,10 +44,8 @@ $(document).ready(function(){
     function subscribeToStreams(streams) {
         var subscribersElement = $('#subscribers');
         var subscriberProperties = {width:200, height:150};
-        console.log( 'the session connectionId is:', session.connection.connectionId);
         for (var i = 0; i < streams.length; i++) {
             var stream = streams[i];
-            console.log('the stream connectionId is:', stream.connection.connectionId);
             if (stream.connection.connectionId 
              != session.connection.connectionId) 
             {
@@ -84,9 +81,15 @@ $(document).ready(function(){
 
         session.addEventListener("streamCreated", 
         streamCreatedHandler);
+
+        window.setTimeout(function(){
+            $('body').trigger('welcome');
+        }, 2000);
         
 
     }
+
+
 
 
 })

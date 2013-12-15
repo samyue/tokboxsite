@@ -3,25 +3,14 @@ var express = require('express');
 
 
 var app = express();
-
-
-
 var http = require('http');
-
-
-
 var server = http.createServer(app);
-
-
-
 var io = require('socket.io').listen(server, {log:false});
-
 var portNumber = 1339;
 
 server.listen(portNumber);
 
 console.log('listen on ' + portNumber);
-
 
 app.get('/test', function(req, res){
 
@@ -46,10 +35,6 @@ io.configure(function () {
 
 io.sockets.on('connection', function (socket) {
 	console.log('connected!');
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-	    console.log(data);
-	});
 
 	socket.on('newMessage', function(data){
 		console.log('get new message: ', data);
